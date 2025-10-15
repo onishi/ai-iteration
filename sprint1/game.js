@@ -54,6 +54,11 @@ function init() {
 function startGame() {
     if (gameRunning) return;
 
+    // 既存のゲームループをクリア
+    if (gameLoop) {
+        clearInterval(gameLoop);
+    }
+
     gameRunning = true;
     gamePaused = false;
     score = 0;
@@ -364,6 +369,18 @@ function handleKeyPress(e) {
 function togglePause() {
     if (!gameRunning) return;
     gamePaused = !gamePaused;
+
+    // ポーズ状態を視覚的に表示
+    if (gamePaused) {
+        ctx.fillStyle = 'rgba(0, 0, 0, 0.7)';
+        ctx.fillRect(0, 0, canvas.width, canvas.height);
+        ctx.fillStyle = 'white';
+        ctx.font = '48px Arial';
+        ctx.textAlign = 'center';
+        ctx.fillText('PAUSE', canvas.width / 2, canvas.height / 2);
+    } else {
+        drawBoard();
+    }
 }
 
 // スコア更新
