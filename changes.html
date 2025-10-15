@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>スプリント履歴 - AI Iteration Project</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Arial', 'Hiragino Sans', 'Meiryo', sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+            padding: 40px;
+        }
+
+        h1 {
+            color: #667eea;
+            text-align: center;
+            margin-bottom: 15px;
+            font-size: 2.5em;
+        }
+
+        .subtitle {
+            text-align: center;
+            color: #666;
+            margin-bottom: 40px;
+            font-size: 1.1em;
+        }
+
+        .sprint {
+            margin-bottom: 30px;
+            border: 2px solid #667eea;
+            border-radius: 15px;
+            padding: 25px;
+            background: #f8f9fa;
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+
+        .sprint:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(102, 126, 234, 0.3);
+        }
+
+        .sprint-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 15px;
+        }
+
+        .sprint-title {
+            font-size: 1.8em;
+            color: #667eea;
+            font-weight: bold;
+        }
+
+        .sprint-status {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-size: 0.9em;
+            font-weight: bold;
+        }
+
+        .sprint-description {
+            color: #555;
+            margin-bottom: 20px;
+            line-height: 1.6;
+        }
+
+        .changes-list {
+            background: white;
+            border-radius: 10px;
+            padding: 20px;
+            margin-bottom: 20px;
+        }
+
+        .changes-list h3 {
+            color: #667eea;
+            margin-bottom: 15px;
+            font-size: 1.2em;
+        }
+
+        .changes-list ul {
+            list-style: none;
+            padding-left: 0;
+        }
+
+        .changes-list li {
+            padding: 10px;
+            border-left: 3px solid #667eea;
+            margin-bottom: 10px;
+            padding-left: 15px;
+            background: #f8f9fa;
+        }
+
+        .changes-list li:before {
+            content: "✓ ";
+            color: #667eea;
+            font-weight: bold;
+            margin-right: 10px;
+        }
+
+        .links {
+            display: flex;
+            gap: 15px;
+            flex-wrap: wrap;
+        }
+
+        .link-btn {
+            display: inline-block;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            text-decoration: none;
+            padding: 10px 20px;
+            border-radius: 8px;
+            font-weight: bold;
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+
+        .link-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 12px rgba(102, 126, 234, 0.4);
+        }
+
+        .demo-btn {
+            background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+        }
+
+        footer {
+            margin-top: 50px;
+            text-align: center;
+            color: #666;
+            padding-top: 20px;
+            border-top: 2px solid #eee;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>スプリント履歴</h1>
+        <p class="subtitle">AI主導型チーム開発プロジェクト - ブラウザゲーム開発の記録</p>
+
+        <!-- Sprint 1 -->
+        <div class="sprint">
+            <div class="sprint-header">
+                <div class="sprint-title">Sprint 1</div>
+                <div class="sprint-status">✓ 完了</div>
+            </div>
+
+            <div class="sprint-description">
+                初めてのスプリントとして、シンプルで面白いブラウザゲームの基本形を完成させました。
+                <strong>「カラーブロック」</strong>という落ち物パズルゲームを開発しました。
+            </div>
+
+            <div class="changes-list">
+                <h3>主な変更点・実装内容</h3>
+                <ul>
+                    <li>ゲームの基本構造（HTML, CSS, JavaScript）の実装</li>
+                    <li>ブロックの落下、移動、回転の操作システム</li>
+                    <li>同じ色が3つ以上並んだら消える消去ロジック</li>
+                    <li>重力システムと連鎖機能の実装</li>
+                    <li>スコアとレベルシステムの実装</li>
+                    <li>グラデーション背景と色鮮やかなビジュアルデザイン</li>
+                    <li>ゲームオーバー画面とリスタート機能</li>
+                    <li>ポーズ機能の実装と視覚的フィードバック</li>
+                    <li>コードレビューによる品質改善（メモリリーク防止など）</li>
+                </ul>
+            </div>
+
+            <div class="changes-list">
+                <h3>スプリントレビューでのフィードバック</h3>
+                <ul>
+                    <li>次に落ちてくるブロックのプレビュー表示の追加</li>
+                    <li>ハイスコアの記録機能の実装</li>
+                    <li>BGMと効果音の追加</li>
+                    <li>モバイル対応（タッチ操作）</li>
+                    <li>初心者モードの追加（難易度調整）</li>
+                </ul>
+            </div>
+
+            <div class="links">
+                <a href="sprint1/index.html" class="link-btn demo-btn">ゲームをプレイ</a>
+                <a href="sprint1/planning.md" class="link-btn">プランニング</a>
+                <a href="sprint1/daily.md" class="link-btn">デイリースクラム</a>
+                <a href="sprint1/review.md" class="link-btn">レビュー</a>
+                <a href="sprint1/retrospective.md" class="link-btn">レトロスペクティブ</a>
+            </div>
+        </div>
+
+        <!-- 今後のスプリントはここに追加されます -->
+
+        <footer>
+            <p>このプロジェクトはAI主導でスクラム開発を行う実験的な取り組みです。</p>
+            <p>各スプリントで得られた知見をもとに、継続的に改善を行っています。</p>
+        </footer>
+    </div>
+</body>
+</html>
