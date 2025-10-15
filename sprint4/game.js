@@ -22,6 +22,9 @@ let gameOverSound;
 let levelUpSound;
 let musicEnabled = true;
 
+// ビジュアルエフェクト用
+let particleOverlay;
+
 // ゲームボード (0: 空, 1-6: 色のインデックス)
 let board = [];
 
@@ -60,6 +63,9 @@ function init() {
     clearSound = document.getElementById('clearSound');
     gameOverSound = document.getElementById('gameOverSound');
     levelUpSound = document.getElementById('levelUpSound');
+
+    // ビジュアルエフェクト要素の初期化
+    particleOverlay = document.getElementById('particleOverlay');
 
     // 音楽設定の読み込み
     loadMusicSettings();
@@ -225,6 +231,7 @@ function update() {
 function checkAndClearBlocks() {
     let blocksCleared = false;
     let clearedCount = 0;
+    let clearedPositions = [];
 
     // 横方向のチェック
     for (let row = 0; row < ROWS; row++) {
@@ -240,6 +247,7 @@ function checkAndClearBlocks() {
                 }
                 // 消去
                 for (let c = col; c < endCol; c++) {
+                    clearedPositions.push({ x: c, y: row, color: board[row][c] });
                     board[row][c] = 0;
                     clearedCount++;
                 }
@@ -263,8 +271,11 @@ function checkAndClearBlocks() {
                 }
                 // 消去
                 for (let r = row; r < endRow; r++) {
-                    board[r][col] = 0;
-                    clearedCount++;
+                    if (board[r][col] !== 0) {
+                        clearedPositions.push({ x: col, y: r, color: board[r][col] });
+                        board[r][col] = 0;
+                        clearedCount++;
+                    }
                 }
                 blocksCleared = true;
                 row = endRow - 1;
@@ -273,6 +284,9 @@ function checkAndClearBlocks() {
     }
 
     if (blocksCleared) {
+        // ビジュアルエフェクトを表示
+        showClearEffects(clearedPositions);
+
         // ブロック消去音を再生
         playSound(clearSound);
 
@@ -599,6 +613,57 @@ function toggleMusic() {
 
     // 視覚的フィードバック（オプション）
     console.log('Music:', musicEnabled ? 'ON' : 'OFF');
+}
+
+// ビジュアルエフェクト: ブロック消去時のフラッシュとパーティクル
+function showClearEffects(clearedPositions) {
+    // フラッシュエフェクト
+    canvas.classList.add('flash-effect');
+    setTimeout(() => {
+        canvas.classList.remove('flash-effect');
+    }, 300);
+
+    // パーティクルエフェクト
+    clearedPositions.forEach(pos => {
+        createParticles(pos.x, pos.y, pos.color);
+    });
+}
+
+// パーティクルを生成
+function createParticles(x, y, colorIndex) {
+    const color = COLORS[colorIndex - 1];
+    const particleCount = 5;
+    const canvasRect = canvas.getBoundingClientRect();
+
+    // キャンバス内の実際の位置を計算
+    const centerX = x * BLOCK_SIZE + BLOCK_SIZE / 2;
+    const centerY = y * BLOCK_SIZE + BLOCK_SIZE / 2;
+
+    for (let i = 0; i < particleCount; i++) {
+        const particle = document.createElement('div');
+        particle.className = 'particle';
+        particle.style.backgroundColor = color;
+        particle.style.left = `${centerX}px`;
+        particle.style.top = `${centerY}px`;
+
+        // ランダムな方向に散らばる
+        const angle = (Math.PI * 2 * i) / particleCount + (Math.random() * 0.5);
+        const distance = 20 + Math.random() * 20;
+        const offsetX = Math.cos(angle) * distance;
+
+        particle.style.setProperty('--offset-x', `${offsetX}px`);
+        particle.style.animation = `particle-rise 0.6s ease-out forwards`;
+
+        // アニメーションの微調整
+        particle.style.animationDelay = `${i * 0.02}s`;
+
+        particleOverlay.appendChild(particle);
+
+        // アニメーション終了後に削除
+        setTimeout(() => {
+            particle.remove();
+        }, 700);
+    }
 }
 
 // ページ読み込み時に初期化
