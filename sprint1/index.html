@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>カラーブロック - Color Block Puzzle</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>カラーブロック</h1>
+            <div class="score-area">
+                <div class="score-item">
+                    <span class="label">スコア:</span>
+                    <span id="score">0</span>
+                </div>
+                <div class="score-item">
+                    <span class="label">レベル:</span>
+                    <span id="level">1</span>
+                </div>
+            </div>
+        </header>
+
+        <main>
+            <div class="game-wrapper">
+                <canvas id="gameCanvas" width="300" height="600"></canvas>
+                <div id="gameOver" class="game-over hidden">
+                    <h2>ゲームオーバー</h2>
+                    <p>最終スコア: <span id="finalScore">0</span></p>
+                    <button id="restartBtn">もう一度プレイ</button>
+                </div>
+            </div>
+
+            <aside class="controls">
+                <h3>操作方法</h3>
+                <ul>
+                    <li><strong>←/→</strong>: 左右移動</li>
+                    <li><strong>↓</strong>: 高速落下</li>
+                    <li><strong>スペース</strong>: 回転</li>
+                    <li><strong>P</strong>: ポーズ</li>
+                </ul>
+                <button id="startBtn" class="start-btn">ゲーム開始</button>
+            </aside>
+        </main>
+    </div>
+
+    <script src="game.js"></script>
+</body>
+</html>
