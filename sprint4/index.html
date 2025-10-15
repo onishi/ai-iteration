@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>カラーブロック - Color Block Puzzle</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>カラーブロック</h1>
+            <div class="score-area">
+                <div class="score-item">
+                    <span class="label">スコア:</span>
+                    <span id="score">0</span>
+                </div>
+                <div class="score-item">
+                    <span class="label">ハイスコア:</span>
+                    <span id="highScore">0</span>
+                </div>
+                <div class="score-item">
+                    <span class="label">レベル:</span>
+                    <span id="level">1</span>
+                </div>
+            </div>
+        </header>
+
+        <main>
+            <aside class="preview-area">
+                <h3>次のブロック</h3>
+                <canvas id="previewCanvas" width="100" height="100"></canvas>
+            </aside>
+            <div class="game-wrapper">
+                <canvas id="gameCanvas" width="300" height="600"></canvas>
+                <div id="gameOver" class="game-over hidden">
+                    <h2>ゲームオーバー</h2>
+                    <p>最終スコア: <span id="finalScore">0</span></p>
+                    <p id="newHighScore" class="new-high-score hidden">新記録達成！</p>
+                    <button id="restartBtn">もう一度プレイ</button>
+                </div>
+            </div>
+
+            <aside class="controls">
+                <h3>操作方法</h3>
+                <ul>
+                    <li><strong>←/→</strong>: 左右移動</li>
+                    <li><strong>↓</strong>: 高速落下</li>
+                    <li><strong>スペース</strong>: 回転</li>
+                    <li><strong>P</strong>: ポーズ</li>
+                    <li><strong>M</strong>: 音楽 ON/OFF</li>
+                </ul>
+                <button id="startBtn" class="start-btn">ゲーム開始</button>
+            </aside>
+        </main>
+    </div>
+
+    <!-- Audio Elements -->
+    <!--
+        実際の音源ファイルはCC0ライセンスのものを使用します
+        例: https://freesound.org/ などから取得
+        ここではプレースホルダーとしてdata URIを使用
+    -->
+    <audio id="bgm" loop>
+        <!-- <source src="sounds/bgm.mp3" type="audio/mpeg"> -->
+        <!-- プレースホルダー: 実際のBGMファイルをここに配置 -->
+    </audio>
+    <audio id="clearSound">
+        <!-- <source src="sounds/clear.mp3" type="audio/mpeg"> -->
+        <!-- プレースホルダー: ブロック消去音 -->
+    </audio>
+    <audio id="gameOverSound">
+        <!-- <source src="sounds/gameover.mp3" type="audio/mpeg"> -->
+        <!-- プレースホルダー: ゲームオーバー音 -->
+    </audio>
+    <audio id="levelUpSound">
+        <!-- <source src="sounds/levelup.mp3" type="audio/mpeg"> -->
+        <!-- プレースホルダー: レベルアップ音 -->
+    </audio>
+
+    <script src="game.js"></script>
+</body>
+</html>
